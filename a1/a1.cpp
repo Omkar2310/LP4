@@ -11,6 +11,7 @@ Enter 2nd set
 */
 
 #include<bits/stdc++.h>
+#include <chrono>
 using namespace std;
 
 class FuzzySet{
@@ -326,10 +327,78 @@ class FuzzySet{
 
 int main(){
 	FuzzySet f;
+	auto t_start = std::chrono::high_resolution_clock::now();
+	// the work...
+	auto t_end = std::chrono::high_resolution_clock::now();
 	f.union_fuzz();
 	f.inter_fuzz();
 	f.complement_fuzz();
 	f.diff_fuzz();
 	f.fuzz_relation();
 	f.max_min_compo();
+	double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end-t_start).count();
+	cout<<"time : "<<elapsed_time_ms<<endl;
 }
+
+//output
+
+/*
+
+(base) omkar@omkar-lenovo:~/OMKAR/BE/LP4/a1$ g++ a1.cpp 
+(base) omkar@omkar-lenovo:~/OMKAR/BE/LP4/a1$ ./a.out 
+Enter number if elements
+4
+Enter 1st set
+1 2
+0.3 4
+0.5 6
+0.2 8
+Enter 2nd set
+0.5 2
+0.4 4
+0.1 6
+1 8
+Union is : 
+1    0.4    0.5    1    
+---- ---- ---- ---- 
+2    4    6    8    
+Intersection is : 
+0.5    0.3    0.1    0.2    
+---- ---- ---- ---- 
+2    4    6    8    
+Complement of arr1 :
+0    0.7    0.5    0.8    
+---- ---- ---- ---- 
+2    4    6    8    
+Complement of arr2 :
+0.5    0.6    0.9    0    
+---- ---- ---- ---- 
+2    4    6    8    
+Difference is : 
+0.5    0.3    0.5    0    
+---- ---- ---- ---- 
+2    4    6    8    
+Difference is : 
+0    0.4    0.1    0.8    
+---- ---- ---- ---- 
+2    4    6    8    
+FUZZY RELATION IS : 
+0.5 0.4 0.1 1 
+0.3 0.3 0.1 0.3 
+0.5 0.4 0.1 0.5 
+0.2 0.2 0.1 0.2 
+Enter size of 1st
+1 3
+Enter Fuzzy relation 1
+0.1 0.2 0.7
+Enter size of 2nd
+3 3
+Enter Fuzzy relation 2
+0.9 0.4 0.9
+0.2 0.2 0.2
+0.5 0.4 0.5
+MAX MIN COMPOSITION IS :
+0.5 0.4 0.5 
+time : 0.000508
+
+*/
